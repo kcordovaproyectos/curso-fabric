@@ -1,0 +1,74 @@
+table dim_cliente
+	lineageTag: 854f4ecc-c3b6-4851-ae5b-05f6099a8ab5
+	sourceLineageTag: 0b76bba4-c1bb-4ba8-b74f-be750831b74a
+
+	column cliente_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: 3731859b-ce6e-4c9c-9176-af30fa9f360c
+		sourceLineageTag: 2d668f53-0dd5-4252-b826-caca150b482a
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: cliente_key
+
+		annotation SummarizationSetBy = User
+
+	column cliente_id_nk
+		dataType: string
+		lineageTag: 35e973c3-b3f5-4ec6-9b19-71bd86e2e281
+		sourceLineageTag: c1b49f3f-744a-4347-a9c4-3d59091abc5d
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: cliente_id_nk
+
+		annotation SummarizationSetBy = User
+
+	column nombre_cliente
+		dataType: string
+		lineageTag: a880a9ab-6fb7-47d5-892c-73e82474c1f6
+		sourceLineageTag: ea9675de-c878-44e7-b0dc-f2561d96d460
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: nombre_cliente
+
+		annotation SummarizationSetBy = User
+
+	column ciudad
+		dataType: string
+		lineageTag: 41913347-0ffa-4a4d-80b2-405ba4655f12
+		sourceLineageTag: 67585b73-8216-4acd-8654-5bcab566f7e9
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: ciudad
+
+		annotation SummarizationSetBy = User
+
+	column pais
+		dataType: string
+		lineageTag: 03e5b53f-0b0e-451a-8fd7-944b5e1a73b9
+		sourceLineageTag: 5a4e5be0-6379-4c44-b16f-98bd95f6effd
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: pais
+
+		annotation SummarizationSetBy = User
+
+	column segmento
+		dataType: string
+		lineageTag: f9f9eda0-a32f-4045-b8e0-bde0a5827526
+		sourceLineageTag: 0413fafa-d2f3-4ded-940b-8aaf3b52c083
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: segmento
+
+		annotation SummarizationSetBy = User
+
+	partition dim_cliente = entity
+		mode: directQuery
+		source
+			entityName: dim_cliente
+			expressionSource: 'De DirectQuery a AS: MS_Ventas_Version1'
+
+	annotation PBI_ResultType = Exception
+

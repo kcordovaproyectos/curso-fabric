@@ -1,0 +1,16 @@
+relationship 4204321a-efab-4100-aac0-72ea0b622fef
+	fromColumn: fact_ventas.cliente_key
+	toColumn: dim_cliente.cliente_key
+
+relationship d7e6267f-e278-4afb-9e1f-de0779f28789
+	fromColumn: fact_ventas.producto_key
+	toColumn: dim_producto.producto_key
+
+relationship 1788ede3-0f77-4ca7-a510-a37e71f43113
+	fromColumn: fact_ventas.tienda_key
+	toColumn: dim_tienda.tienda_key
+
+relationship 606b484d-6bae-4a71-aa99-e7bb87903772
+	fromColumn: fact_ventas.fecha_key
+	toColumn: dim_tiempo.fecha_key
+

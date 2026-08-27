@@ -1,0 +1,11 @@
+expression 'De DirectQuery a AS: MS_Ventas_Version1' =
+		let
+		    Source = AnalysisServices.Database("powerbi://api.powerbi.com/v1.0/myorg/WS-CursoFabricKevin-DEV", "MS_Ventas_Version1"),
+		    Cubes = Table.Combine(Source[Data]),
+		    Cube = Cubes{[Id="Model", Kind="Cube"]}[Data]
+		in
+		    Cube
+	lineageTag: 5fd1036a-158b-4c8a-bba6-a90ee0ca13e1
+
+	annotation PBI_IncludeFutureArtifacts = True
+
