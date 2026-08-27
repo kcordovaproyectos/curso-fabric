@@ -4,10 +4,10 @@
   "position": {
     "x": 255.34804753820035,
     "y": 15.212224108658743,
-    "z": 3003,
+    "z": 6000,
     "height": 76.061120543293725,
     "width": 151.03565365025466,
-    "tabOrder": 2003
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "card",
@@ -67,23 +67,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "d9c6ee6b2cd290bc1c29",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Medidas"
-              }
-            },
-            "Property": "Ventas Totales"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
