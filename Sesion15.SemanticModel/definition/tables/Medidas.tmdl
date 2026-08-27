@@ -1,0 +1,173 @@
+table Medidas
+	lineageTag: 19764e2b-e2b9-49e2-8b7c-e8d59f5fb543
+
+	measure 'Ventas Totales' = SUM(fact_ventas[monto_total])
+		lineageTag: f11ffa4c-2800-4654-a917-90dd63601f3c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Numero de Ventas' = COUNTROWS(fact_ventas)
+		formatString: 0
+		lineageTag: 35fa74be-4bea-4082-a325-d0293eef88dd
+
+	measure 'Clientes Unicos' = DISTINCTCOUNT(fact_ventas[cliente_key])
+		formatString: 0
+		lineageTag: 3589be37-ea95-4636-8fcf-212ece481551
+
+	measure 'Ticket Promedio' = DIVIDE([Ventas Totales], [Numero de Ventas])
+		lineageTag: a6f63dc0-273c-4939-9b06-87acd420bd9f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas Netas' =
+			
+			SUMX(
+			    fact_ventas,
+			    fact_ventas[cantidad] * fact_ventas[precio_unitario] * (1 - fact_ventas[descuento])
+			)
+		lineageTag: 511f5226-fd2f-4b6b-8f55-e57857c9fe5a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Venta Maxima por Producto' =
+			
+			MAXX(
+			    VALUES(dim_producto[nombre_producto]), [Ventas Totales]
+			)
+		lineageTag: d32ae9d2-9f37-4fd0-8269-ece2dcc89bb8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas de Bebidas' =
+			
+			CALCULATE(
+			    [Ventas Totales], dim_producto[categoria] = "Bebidas"
+			)
+		lineageTag: e6cb7c5d-6037-4ae4-b1cf-b564bcf39645
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas C01' =
+			
+			CALCULATE(
+			    [Ventas Totales], dim_tiempo[campania] = "C01"
+			)
+		lineageTag: 47a3ce83-5107-4f93-b94c-7cde1dbd17d6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Var% sobre C01' = DIVIDE([Ventas Totales] - [Ventas C01], [Ventas C01])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2dbe7aa9-9480-4c3f-8c6a-474c2c42f247
+
+	measure 'Ventas ignorando la Tiendas' =
+			
+			CALCULATE(
+			    [Ventas Totales], REMOVEFILTERS(dim_tienda)
+			)
+		lineageTag: 719d77e3-3ed2-4f82-8727-18308316faea
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas con Descuento' =
+			
+			CALCULATE(
+			    [Ventas Totales],
+			    FILTER(fact_ventas, fact_ventas[descuento]>0)
+			)
+		lineageTag: 0891fed2-7181-404d-9d97-a0ba85460500
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ranking de Productos' =
+			
+			RANKX(
+			    ALL(dim_producto[nombre_producto]), [Ventas Totales], , Desc
+			)
+		formatString: 0
+		lineageTag: b26e869b-c70f-416e-9403-566cc65be993
+
+	measure 'Ventas Top 3 Productos' =
+			
+			CALCULATE(
+			    [Ventas Totales],
+			    TOPN(3, ALL(dim_producto[nombre_producto]), [Ventas Totales], DESC)
+			)
+		lineageTag: 0b15b1a1-37b2-4f62-86f6-406639f2ef9f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas Top 1 Productos' =
+			
+			CALCULATE(
+			    [Ventas Totales],
+			    TOPN(1, ALL(dim_producto[nombre_producto]), [Ventas Totales], DESC)
+			)
+		lineageTag: 187c8858-6f27-4e86-8571-bab0cb0f4819
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas Top 5 Productos' =
+			
+			CALCULATE(
+			    [Ventas Totales],
+			    TOPN(5, ALL(dim_producto[nombre_producto]), [Ventas Totales], DESC)
+			)
+		lineageTag: 04f5d2d5-3694-456a-9010-b9a82a555eec
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ventas % Top 1' = DIVIDE([Ventas Top 1 Productos], [Ventas Totales])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3cc008ab-e3c8-4b28-a7e5-a4c055f830b1
+
+	measure 'Ventas % Top 3' = DIVIDE([Ventas Top 3 Productos], [Ventas Totales])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ec62c154-0078-4739-8dc8-81336a712ef0
+
+	measure 'Ventas % Top 5' = DIVIDE([Ventas Top 5 Productos], [Ventas Totales])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: cd053739-8163-4db8-aced-f3e8a562cc9f
+
+	measure 'Clasificacion de Ventas' =
+			
+			SWITCH(
+			    TRUE(),
+			    [Ventas Totales] >= 450, "Alto",
+			    [Ventas Totales] >= 300, "Medio",
+			    "Bajo"
+			)
+		lineageTag: d2a57be8-3d6a-4dfd-ad29-e24ab30f40fb
+
+	measure 'Titulo Dinamico' =
+			
+			"Ventas de " & SELECTEDVALUE(dim_producto[categoria], "Todas las categorías")
+		lineageTag: 3322f38f-2b60-4800-b7aa-804d8ee4f747
+
+	measure 'Top 3 Productos (texto)' =
+			
+			VAR _TXT1 = "El Top 3 de productos son: "
+			VAR _TXT2 = CONCATENATEX(
+			    TOPN(3, VALUES(dim_producto[nombre_producto]), [Ventas Totales], DESC),
+			    dim_producto[nombre_producto], ", ", [Ventas Totales], DESC
+			)
+			VAR _TXT3 =" con ventas totales de "
+			VAR _TXT4 =[Ventas Top 3 Productos]
+			VAR _TXT5 = " que representa el " & FORMAT([Ventas % Top 3], "0.00 %") & " del total"
+			
+			RETURN
+			_TXT1 & _TXT2 & _TXT3 & _TXT4 & _TXT5
+		lineageTag: 5a36de9d-e697-47c0-95d6-d27227706878
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Columna1", type text}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Columna1"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_ResultType = Table
+
