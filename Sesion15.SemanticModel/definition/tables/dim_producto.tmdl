@@ -1,0 +1,75 @@
+table dim_producto
+	lineageTag: 2902e3e6-2bf8-47bd-ae58-bab592ca0bb8
+	sourceLineageTag: 89e4a096-488a-4ca0-b290-f26e24f408ea
+
+	column producto_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: e752cc07-3126-46ad-a546-e52387a4c66a
+		sourceLineageTag: 88190ec6-3e5a-4667-85e9-bf83e50fd0e2
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: producto_key
+
+		annotation SummarizationSetBy = User
+
+	column producto_id_nk
+		dataType: string
+		lineageTag: 8488c292-f40e-4b0a-9aaf-4d7d0a0ae619
+		sourceLineageTag: 224a113c-0162-4ac2-b3e5-4d79de51e925
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: producto_id_nk
+
+		annotation SummarizationSetBy = User
+
+	column nombre_producto
+		dataType: string
+		lineageTag: e6432441-a580-4ec3-9c2e-c23313a76d5f
+		sourceLineageTag: d177acff-51a0-4dcf-959b-5596b67ad3ae
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: nombre_producto
+
+		annotation SummarizationSetBy = User
+
+	column categoria
+		dataType: string
+		lineageTag: 6b1dc673-fdea-4464-9758-619728b21704
+		sourceLineageTag: 76284d30-b402-46ae-b982-70aa434589f1
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = User
+
+	column subcategoria
+		dataType: string
+		lineageTag: b5b94481-6ea2-423d-a51a-ee71232c392c
+		sourceLineageTag: 69f12501-882b-4d1b-a6dd-3ceff5bfea59
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: subcategoria
+
+		annotation SummarizationSetBy = User
+
+	column precio_lista
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 3883fa20-0cd9-465d-bb95-00a63068543b
+		sourceLineageTag: 275cbf7c-3208-44fc-8c35-4845d1af576c
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: precio_lista
+
+		annotation SummarizationSetBy = User
+
+	partition dim_producto = entity
+		mode: directQuery
+		source
+			entityName: dim_producto
+			expressionSource: 'De DirectQuery a AS: MS_Ventas_Version1'
+
+	annotation PBI_ResultType = Exception
+
