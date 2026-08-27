@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "7d2435b07a0b2c3465b5",
+  "position": {
+    "x": 414.80451781059952,
+    "y": 376.99391833188531,
+    "z": 3000,
+    "height": 342.51954821894009,
+    "width": 865.19548218940054,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Top 3 Productos (texto)"
+                }
+              },
+              "queryRef": "Medidas.Top 3 Productos (texto)",
+              "nativeQueryRef": "Top 3 Productos (texto)"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "categoryLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
