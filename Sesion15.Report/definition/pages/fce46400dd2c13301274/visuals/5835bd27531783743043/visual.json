@@ -4,10 +4,10 @@
   "position": {
     "x": 557.41935483870964,
     "y": 15.212224108658743,
-    "z": 3004,
+    "z": 7000,
     "height": 76.061120543293725,
     "width": 151.03565365025466,
-    "tabOrder": 2004
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "card",
@@ -67,23 +67,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "fe0f91d70888d68e0378",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Medidas"
-              }
-            },
-            "Property": "Ticket Promedio"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

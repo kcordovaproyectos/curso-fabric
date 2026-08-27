@@ -4,10 +4,10 @@
   "position": {
     "x": 406.383701188455,
     "y": 15.212224108658743,
-    "z": 3005,
+    "z": 8000,
     "height": 76.061120543293725,
     "width": 151.03565365025466,
-    "tabOrder": 2005
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "card",
@@ -67,23 +67,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "12152b72771e82273eeb",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Medidas"
-              }
-            },
-            "Property": "Numero de Ventas"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }
